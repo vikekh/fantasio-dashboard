@@ -1,14 +1,13 @@
 version: "3.7"
 
 services:
-  heimdall:
-    image: linuxserver/heimdall
+  homer:
+    image: b4bz/homer
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - UID=${PUID}
+      - GID=${PGID}
     volumes:
-      - ./.heimdall/config:/config
-    ports:
-      - 80:80
+      - ./homer/assets:/www/assets
+    expose:
+      - 8080
     restart: unless-stopped
