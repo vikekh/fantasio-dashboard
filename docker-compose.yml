@@ -3,6 +3,7 @@ version: "3.7"
 services:
   homer:
     image: b4bz/homer
+    container_name: homer
     environment:
       - UID=${PUID}
       - GID=${PGID}
@@ -10,4 +11,13 @@ services:
       - ./.homer/assets:/www/assets
     expose:
       - 8080
+    networks:
+      - dashboard
+      - reverse-proxy
     restart: unless-stopped
+
+networks:
+  dashboard:
+    external: true
+  reverse-proxy:
+    external: true
