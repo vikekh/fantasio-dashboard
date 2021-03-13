@@ -8,7 +8,7 @@ services:
       - UID=${PUID}
       - GID=${PGID}
     volumes:
-      - ./.homer/assets:/www/assets
+      - homer-assets:/www/assets
     expose:
       - 8080
     networks:
@@ -16,8 +16,12 @@ services:
       - reverse-proxy
     restart: unless-stopped
 
+volumes:
+  homer-assets:
+    name: homer-assets
+
 networks:
   dashboard:
-    external: true
+    name: dashboard
   reverse-proxy:
     external: true
