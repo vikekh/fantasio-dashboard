@@ -16,10 +16,29 @@ services:
       - dashboard
       - reverse-proxy
     restart: unless-stopped
+    
+  organizr:
+    image: organizr/organizr
+    container_name: organizr
+    environment:
+      - UID=${PUID}
+      - GID=${PGID}
+      - fpm=false
+      - branch=v2-master
+    volumes:
+      - organizr-config:/config
+    expose:
+      - 80
+    networks:
+      - dashboard
+      - reverse-proxy
+    restart: unless-stopped
 
 volumes:
   homer-assets:
     name: homer-assets
+  organizr-config:
+    name: organizr-config
 
 networks:
   dashboard:
